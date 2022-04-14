@@ -64,22 +64,26 @@ d3.json(
     },
   }).addTo(myMap);
 
+
   //  Set up the legend.
-       var legend = L.control({position: 'bottomleft'});
-       legend.onAdd = function (map) {
+  var legend = L.control({position: 'bottomleft'});
+  legend.onAdd = function (map) {
 
-       var div = L.DomUtil.create('div', 'info legend');
-        depth = ['depth_90+','depth>70','depth>50','depth>30','depth>10', 'depth<10'];
-       for (var i = 0; i < depth.length; i++) {
+  var div = L.DomUtil.create('div', 'info legend');
+   labels = ['<strong>Earthquake Depth Range</strong>'],
+   depth = [90,70,50,30,10,0];
+  for (var i = 0; i < depth.length; i++) {
 
-               div.innerHTML +=
-                   '<i style="background:' + getcolor(depth[i]) + '"></i> ' +
-                    (depth[i] ? depth[i] + '<br>': '+');
+          div.innerHTML +=
+          labels.push(
+              '<i style="background:' + getcolor(depth[i]+1) + '"></i> ' +
+               (depth[i] ? depth[i] + '<br>': '+'));
+               div.innerHTML = labels.join('<br>');
 
-      }
-       return div;
-      }
+ }
+  return div;
+ }
 
-    legend.addTo(myMap);
-  });
+legend.addTo(myMap);
+});
 
